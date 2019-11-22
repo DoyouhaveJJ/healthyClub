@@ -54,6 +54,7 @@ public class RegisterController
             return "success";
         }
         else return "failure";
+
     }
 
 
@@ -122,11 +123,6 @@ public class RegisterController
     public String LoginOut(HttpSession httpSession){
         //httpSession.setAttribute("user",null);
         httpSession.removeAttribute("user");
-        httpSession.removeAttribute("jishi");
-        httpSession.removeAttribute("jsID");
-        httpSession.removeAttribute("admin");
-
         return "success";
     }
-
 }
