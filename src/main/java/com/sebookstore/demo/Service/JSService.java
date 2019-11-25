@@ -10,6 +10,6 @@ public interface JSService
     JSUser findById(long id);
     List<JSUser> findAll();
     JSUser save(JSUser jsUser);
-    List<JSUser> findByJsStatu(int jsStatu);
+    List<JSUser> findAllByJsStatu(int jsStatu);
 
 }

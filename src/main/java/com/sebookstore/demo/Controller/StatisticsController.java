@@ -12,10 +12,7 @@ import com.sebookstore.demo.Service.JSService;
 import com.sebookstore.demo.Service.OrderService;
 import com.sebookstore.demo.Service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -53,8 +50,27 @@ public class StatisticsController {
     @RequestMapping(value ="/getOnlineJishiCount",method = RequestMethod.POST)
     public JSONArray GetOnlineJishiCount()
     {
-        List<JSUser> jsUsers= jsService.findByJsStatu(1);
+        List<JSUser> jsUsers= jsService.findAllByJsStatu(1);
         JSONArray jsonArray=JSONArray.parseArray(JSON.toJSONString(jsUsers));
+        return jsonArray;
+    }
+
+    @ResponseBody
+    @RequestMapping(value ="/getFinishedOrderCount",method = RequestMethod.POST)
+    public JSONArray GetFinishedOrderCount()
+    {
+        List<UserOrder> userOrders = orderService.findAllByState(true);
+        JSONArray jsonArray=JSONArray.parseArray(JSON.toJSONString(userOrders));
+        return jsonArray;
+    }
+
+    @ResponseBody
+    @RequestMapping(value ="/getTypeOrderCount",method = RequestMethod.POST)
+    public JSONArray GetTypeOrderCount(@RequestParam String type)
+    {
+        System.out.println(type);
+        List<UserOrder> userOrders = orderService.findAllByType(type);
+        JSONArray jsonArray=JSONArray.parseArray(JSON.toJSONString(userOrders));
         return jsonArray;
     }
 }
